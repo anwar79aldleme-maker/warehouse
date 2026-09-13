@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اختيار الموقع</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <h1><i class="fa-solid fa-warehouse"></i> نظام مراقبة المخازن</h1>
+        <p>اختر الموقع المطلوب</p>
+      </div>
+      <button id="logoutBtn" class="secondary-btn"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
+    </header>
+
+    <section class="hero-title">
+      <span>المواقع</span>
+      <h2>اختر مجموعة المخازن</h2>
+    </section>
+
+    <section class="locations-grid">
+      <div class="location-card" data-id="mosul" data-name="مخازن الموصل">
+        <div class="location-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <h3>مخازن الموصل</h3>
+        <p>5 مخازن • 10 كاميرات</p>
+      </div>
+      <div class="location-card" data-id="tikrit" data-name="مخازن تكريت">
+        <div class="location-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <h3>مخازن تكريت</h3>
+        <p>12 مخزن • 24 كاميرا</p>
+      </div>
+      <div class="location-card" data-id="jurf" data-name="مخازن جرف النداف">
+        <div class="location-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <h3>مخازن جرف النداف</h3>
+        <p>3 مخازن • 6 كاميرات</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/locations.js"></script>
+</body>
+</html>

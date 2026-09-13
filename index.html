@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول | نظام مراقبة المخازن</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="gov-login-page">
+
+  <div class="gov-background">
+    <div class="sky-glow"></div>
+    <div class="left-building">
+      <div class="building-block block-a"></div>
+      <div class="building-block block-b"></div>
+      <div class="building-block block-c"></div>
+      <div class="building-sign">هيئة البحث العلمي<br><small>SCIENTIFIC RESEARCH COMMISSION</small></div>
+      <div class="building-windows"></div>
+      <div class="building-trees"></div>
+    </div>
+
+    <div class="right-decor">
+      <div class="iraq-outline">
+        <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+        <span class="dot d4"></span><span class="dot d5"></span><span class="dot d6"></span>
+        <span class="dot d7"></span><span class="dot d8"></span>
+        <span class="net-line nl1"></span><span class="net-line nl2"></span><span class="net-line nl3"></span>
+        <span class="net-line nl4"></span><span class="net-line nl5"></span><span class="net-line nl6"></span>
+      </div>
+
+      <div class="right-words">
+        <span>البحث</span>
+        <span>الابتكار</span>
+        <span>المعرفة</span>
+        <span>مستقبل أفضل</span>
+      </div>
+
+      <div class="future-text">بالعلم نبني المستقبل</div>
+    </div>
+
+    <div class="bottom-lines"></div>
+  </div>
+
+  <main class="gov-login-layout">
+
+    <section class="gov-brand">
+      <img src="images/scientific-research-commission-logo.png" alt="هيئة البحث العلمي" class="gov-logo">
+
+      <h1>وزارة التعليم العالي والبحث العلمي</h1>
+      <h2>هيئة البحث العلمي</h2>
+      <h3>مركز بحوث وتكنولوجيا المعلومات والاتصالات</h3>
+
+      <div class="brand-divider">
+        <span></span>
+        <i></i>
+        <span></span>
+      </div>
+    </section>
+
+    <section class="gov-login-card">
+
+      <div class="gov-input-row">
+        <i class="fa-regular fa-user"></i>
+        <input id="username" type="text" placeholder="اسم المستخدم" autocomplete="username">
+      </div>
+
+      <div class="gov-input-row">
+        <i class="fa-solid fa-lock"></i>
+        <input id="password" type="password" placeholder="كلمة المرور" autocomplete="current-password">
+        <button id="togglePassword" type="button" class="gov-eye" aria-label="إظهار كلمة المرور">
+          <i class="fa-regular fa-eye-slash"></i>
+        </button>
+      </div>
+
+      <button id="loginBtn" class="gov-login-btn">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        <span>تسجيل الدخول</span>
+      </button>
+
+      <div class="or-row">
+        <span></span>
+        <b>أو</b>
+        <span></span>
+      </div>
+
+      <div class="welcome-line">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>مرحباً بكم في نظام مراقبة المخازن</span>
+      </div>
+
+      <div id="msg" class="gov-login-message"></div>
+    </section>
+
+    <section class="gov-bottom-features">
+      <div class="gov-feature">
+        <div class="feature-circle"><i class="fa-solid fa-cloud"></i></div>
+        <span>تقنية حديثة</span>
+      </div>
+      <div class="gov-feature">
+        <div class="feature-circle"><i class="fa-solid fa-database"></i></div>
+        <span>بيانات آمنة</span>
+      </div>
+      <div class="gov-feature">
+        <div class="feature-circle"><i class="fa-solid fa-gear"></i></div>
+        <span>خدمات متكاملة</span>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/login.js"></script>
+  <script>
+    const pass = document.getElementById('password');
+    const toggle = document.getElementById('togglePassword');
+
+    toggle.addEventListener('click', () => {
+      const hidden = pass.type === 'password';
+      pass.type = hidden ? 'text' : 'password';
+      toggle.querySelector('i').className = hidden
+        ? 'fa-regular fa-eye'
+        : 'fa-regular fa-eye-slash';
+    });
+  </script>
+</body>
+</html>

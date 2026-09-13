@@ -1,0 +1,12 @@
+{
+  "name": "warehouse-monitoring-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arabic warehouse monitoring dashboard with Vercel API camera configuration",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.1"
+  }
+}

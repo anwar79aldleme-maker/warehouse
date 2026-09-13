@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تفاصيل المخزن</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app wide">
+    <header class="topbar">
+      <div>
+        <h1 id="warehouseTitle"><i class="fa-solid fa-warehouse"></i> المخزن</h1>
+        <p id="warehouseSubtitle">عرض تفصيلي</p>
+      </div>
+      <div class="actions">
+        <a id="backBtn" class="secondary-btn" href="warehouses.html">
+          <i class="fa-solid fa-arrow-right"></i> رجوع
+        </a>
+        <button id="logoutBtn" class="secondary-btn">
+          <i class="fa-solid fa-right-from-bracket"></i> خروج
+        </button>
+      </div>
+    </header>
+
+    <section class="detail-cameras">
+      <div class="camera-large camera-clickable" data-camera="1" tabindex="0" role="button" aria-label="تكبير كاميرا 1">
+        <div class="camera-top">
+          <span><i class="fa-solid fa-video"></i> كاميرا 1</span>
+          <div class="camera-actions">
+            <b class="live-dot">LIVE</b>
+            <span class="expand-hint"><i class="fa-solid fa-expand"></i> تكبير</span>
+          </div>
+        </div>
+
+        <div class="camera-preview large" id="cameraPreview1">
+          <div class="camera-noise"></div>
+          <i class="fa-solid fa-video"></i>
+          <strong>بث تجريبي - كاميرا 1</strong>
+          <small>اضغط على الكاميرا لعرضها بحجم الشاشة</small>
+        </div>
+      </div>
+
+      <div class="camera-large camera-clickable" data-camera="2" tabindex="0" role="button" aria-label="تكبير كاميرا 2">
+        <div class="camera-top">
+          <span><i class="fa-solid fa-video"></i> كاميرا 2</span>
+          <div class="camera-actions">
+            <b class="live-dot">LIVE</b>
+            <span class="expand-hint"><i class="fa-solid fa-expand"></i> تكبير</span>
+          </div>
+        </div>
+
+        <div class="camera-preview large" id="cameraPreview2">
+          <div class="camera-noise"></div>
+          <i class="fa-solid fa-video"></i>
+          <strong>بث تجريبي - كاميرا 2</strong>
+          <small>اضغط على الكاميرا لعرضها بحجم الشاشة</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-sensors">
+      <div class="sensor-card temperature">
+        <i class="fa-solid fa-temperature-half"></i>
+        <div>
+          <span>درجة الحرارة</span>
+          <strong id="temp">-- °C</strong>
+        </div>
+      </div>
+
+      <div class="sensor-card humidity">
+        <i class="fa-solid fa-droplet"></i>
+        <div>
+          <span>الرطوبة</span>
+          <strong id="hum">-- %</strong>
+        </div>
+      </div>
+
+      <div class="sensor-card connection">
+        <i class="fa-solid fa-wifi"></i>
+        <div>
+          <span>حالة الحساس</span>
+          <strong id="sensorStatus">بانتظار القراءة</strong>
+          <small id="sensorUpdated" style="display:block;margin-top:4px;opacity:.72">--</small>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- نافذة عرض الكاميرا بالحجم الكامل -->
+  <div id="cameraFullscreen" class="camera-fullscreen" aria-hidden="true">
+    <div class="fullscreen-toolbar">
+      <div class="fullscreen-title">
+        <i class="fa-solid fa-video"></i>
+        <span id="fullscreenCameraTitle">كاميرا 1</span>
+        <b class="live-dot">LIVE</b>
+      </div>
+
+      <div class="fullscreen-buttons">
+        <button id="browserFullscreenBtn" class="fullscreen-tool-btn" type="button" title="ملء شاشة المتصفح">
+          <i class="fa-solid fa-expand"></i>
+          <span>ملء الشاشة</span>
+        </button>
+
+        <button id="closeFullscreenBtn" class="fullscreen-tool-btn close" type="button" title="إغلاق">
+          <i class="fa-solid fa-xmark"></i>
+          <span>إغلاق</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="fullscreen-camera-area" id="fullscreenCameraArea">
+      <div class="fullscreen-demo-feed" id="fullscreenDemoFeed">
+        <div class="camera-noise"></div>
+        <div class="fullscreen-center">
+          <i class="fa-solid fa-video"></i>
+          <strong id="fullscreenFeedTitle">بث تجريبي - كاميرا 1</strong>
+          <small>سيظهر هنا البث الحقيقي عند ربط الكاميرا لاحقاً</small>
+        </div>
+
+        <div class="fullscreen-info">
+          <span><i class="fa-solid fa-circle"></i> بث مباشر</span>
+          <span id="fullscreenWarehouseName">المخزن</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/warehouse.js"></script>
+</body>
+</html>
