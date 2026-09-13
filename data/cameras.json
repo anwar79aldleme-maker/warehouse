@@ -1,0 +1,21 @@
+{
+  "mosul": {
+    "warehouses": 5,
+    "camerasPerWarehouse": 2,
+    "linked": {}
+  },
+  "tikrit": {
+    "warehouses": 12,
+    "camerasPerWarehouse": 2,
+    "linked": {
+      "1": {
+        "1": { "path": "camera1", "name": "كاميرا 1", "enabled": true }
+      }
+    }
+  },
+  "jurf": {
+    "warehouses": 3,
+    "camerasPerWarehouse": 2,
+    "linked": {}
+  }
+}
