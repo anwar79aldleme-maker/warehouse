@@ -10,7 +10,7 @@ const cameraState = new Map();
 
 
 // ======================================================
-// عنوان المخزن
+// معلومات المخزن
 // ======================================================
 
 document.getElementById('warehouseTitle').innerHTML =
@@ -20,6 +20,11 @@ document.getElementById('warehouseSubtitle').textContent = name;
 
 document.getElementById('backBtn').href =
   `warehouses.html?location=${encodeURIComponent(loc)}&name=${encodeURIComponent(name)}`;
+
+
+// ======================================================
+// عناصر الحساس
+// ======================================================
 
 const tempEl = document.getElementById('temp');
 const humEl = document.getElementById('hum');
@@ -41,7 +46,7 @@ function setSensorStatus(text, cssClass = '') {
 
 
 // ======================================================
-// تحديث الحساس
+// قراءة الحساس
 // ======================================================
 
 async function updateSensor() {
@@ -67,8 +72,9 @@ async function updateSensor() {
 
     if (r.status === 404) {
 
-      tempEl.textContent = '-- °C';
-      humEl.textContent = '-- %';
+      if (tempEl) tempEl.textContent = '-- °C';
+
+      if (humEl) humEl.textContent = '-- %';
 
       setSensorStatus(
         'بانتظار أول قراءة',
@@ -100,17 +106,25 @@ async function updateSensor() {
 
 
     // الحرارة
-    tempEl.textContent =
-      reading.temperature == null
-        ? '-- °C'
-        : `${Number(reading.temperature).toFixed(1)} °C`;
+    if (tempEl) {
+
+      tempEl.textContent =
+        reading.temperature == null
+          ? '-- °C'
+          : `${Number(reading.temperature).toFixed(1)} °C`;
+
+    }
 
 
     // الرطوبة
-    humEl.textContent =
-      reading.humidity == null
-        ? '-- %'
-        : `${Number(reading.humidity).toFixed(1)} %`;
+    if (humEl) {
+
+      humEl.textContent =
+        reading.humidity == null
+          ? '-- %'
+          : `${Number(reading.humidity).toFixed(1)} %`;
+
+    }
 
 
     // حالة الحساس
@@ -130,7 +144,8 @@ async function updateSensor() {
 
       if (reading.updatedAt) {
 
-        const d = new Date(reading.updatedAt);
+        const d =
+          new Date(reading.updatedAt);
 
         sensorUpdatedEl.textContent =
           `آخر تحديث: ${d.toLocaleTimeString('ar-IQ')}`;
@@ -139,6 +154,7 @@ async function updateSensor() {
 
         sensorUpdatedEl.textContent =
           'وقت التحديث غير متوفر';
+
       }
     }
 
@@ -150,8 +166,13 @@ async function updateSensor() {
       err
     );
 
-    tempEl.textContent = '-- °C';
-    humEl.textContent = '-- %';
+    if (tempEl) {
+      tempEl.textContent = '-- °C';
+    }
+
+    if (humEl) {
+      humEl.textContent = '-- %';
+    }
 
     setSensorStatus(
       'تعذر الاتصال بالحساس',
@@ -171,7 +192,7 @@ setInterval(
 
 
 // ======================================================
-// Placeholder للكاميرا
+// حالة عدم توفر الكاميرا
 // ======================================================
 
 function renderCameraPlaceholder(
@@ -209,7 +230,7 @@ function renderCameraPlaceholder(
 
 
 // ======================================================
-// عرض الكاميرا المباشرة
+// عرض الكاميرا الحقيقية
 // ======================================================
 
 function renderLiveCamera(camera) {
@@ -231,6 +252,11 @@ function renderLiveCamera(camera) {
   );
 
 
+  /*
+    لا يوجد Label "مباشر" داخل الفيديو.
+    عبارة LIVE الموجودة أعلى البطاقة تبقى كما هي في HTML.
+  */
+
   box.innerHTML = `
     <iframe
       src="${camera.streamUrl}"
@@ -238,17 +264,12 @@ function renderLiveCamera(camera) {
       allow="autoplay; fullscreen; picture-in-picture"
       loading="eager">
     </iframe>
-
-    <div class="live-camera-badge">
-      <i class="fa-solid fa-circle"></i>
-      مباشر
-    </div>
   `;
 }
 
 
 // ======================================================
-// تحميل إعدادات الكاميرات
+// تحميل الكاميرات
 // ======================================================
 
 async function loadCameras() {
@@ -269,12 +290,6 @@ async function loadCameras() {
       `/api/cameras?location=${encodeURIComponent(loc)}&warehouse=${encodeURIComponent(wh)}`;
 
 
-    console.log(
-      'Camera API URL:',
-      url
-    );
-
-
     const r = await fetch(url, {
 
       credentials: 'same-origin',
@@ -292,20 +307,16 @@ async function loadCameras() {
     }
 
 
-    const data = await r.json();
-
-
-    console.log(
-      'Camera API response:',
-      data
-    );
+    const data =
+      await r.json();
 
 
     if (!r.ok || !data.ok) {
 
       throw new Error(
-        data.error || 'API_ERROR'
+        data.error || 'CAMERA_API_ERROR'
       );
+
     }
 
 
@@ -391,11 +402,11 @@ async function loadCameras() {
 }
 
 
-// تحميل الكاميرات
+// تشغيل الكاميرات
 loadCameras();
 
 
-// إعادة التحقق من الكاميرات كل 30 ثانية
+// إعادة الفحص كل 30 ثانية
 setInterval(
   loadCameras,
   30000
@@ -403,7 +414,7 @@ setInterval(
 
 
 // ======================================================
-// Fullscreen
+// Full Screen
 // ======================================================
 
 const fullscreenOverlay =
@@ -442,8 +453,12 @@ function openCameraFullscreen(cameraNumber) {
     Number(cameraNumber);
 
 
-  fullscreenCameraTitle.textContent =
-    `كاميرا ${cameraNumber}`;
+  if (fullscreenCameraTitle) {
+
+    fullscreenCameraTitle.textContent =
+      `كاميرا ${cameraNumber}`;
+
+  }
 
 
   const camera =
@@ -465,19 +480,6 @@ function openCameraFullscreen(cameraNumber) {
           title="${camera.name || `كاميرا ${cameraNumber}`}"
           allow="autoplay; fullscreen; picture-in-picture">
         </iframe>
-
-        <div class="fullscreen-live-label">
-
-          <span>
-            <i class="fa-solid fa-circle"></i>
-            بث مباشر
-          </span>
-
-          <span>
-            ${name} - مخزن ${wh}
-          </span>
-
-        </div>
 
       </div>
     `;
@@ -508,7 +510,6 @@ function openCameraFullscreen(cameraNumber) {
         <div class="fullscreen-info">
 
           <span>
-            <i class="fa-solid fa-circle"></i>
             غير متصل
           </span>
 
@@ -523,15 +524,19 @@ function openCameraFullscreen(cameraNumber) {
   }
 
 
-  fullscreenOverlay.classList.add(
-    'show'
-  );
+  if (fullscreenOverlay) {
+
+    fullscreenOverlay.classList.add(
+      'show'
+    );
 
 
-  fullscreenOverlay.setAttribute(
-    'aria-hidden',
-    'false'
-  );
+    fullscreenOverlay.setAttribute(
+      'aria-hidden',
+      'false'
+    );
+
+  }
 
 
   document.body.classList.add(
@@ -541,20 +546,24 @@ function openCameraFullscreen(cameraNumber) {
 
 
 // ======================================================
-// إغلاق Fullscreen
+// إغلاق Full Screen
 // ======================================================
 
 function closeCameraFullscreen() {
 
-  fullscreenOverlay.classList.remove(
-    'show'
-  );
+  if (fullscreenOverlay) {
+
+    fullscreenOverlay.classList.remove(
+      'show'
+    );
 
 
-  fullscreenOverlay.setAttribute(
-    'aria-hidden',
-    'true'
-  );
+    fullscreenOverlay.setAttribute(
+      'aria-hidden',
+      'true'
+    );
+
+  }
 
 
   document.body.classList.remove(
@@ -572,7 +581,7 @@ function closeCameraFullscreen() {
 
 
 // ======================================================
-// أحداث الضغط على الكاميرات
+// الضغط على بطاقة الكاميرا
 // ======================================================
 
 document
@@ -641,8 +650,7 @@ if (fullscreenOverlay) {
     e => {
 
       if (
-        e.target ===
-        fullscreenOverlay
+        e.target === fullscreenOverlay
       ) {
 
         closeCameraFullscreen();
@@ -656,7 +664,7 @@ if (fullscreenOverlay) {
 
 
 // ======================================================
-// زر ESC
+// ESC
 // ======================================================
 
 document.addEventListener(
@@ -683,7 +691,10 @@ document.addEventListener(
 // Fullscreen المتصفح
 // ======================================================
 
-if (browserFullscreenBtn) {
+if (
+  browserFullscreenBtn &&
+  fullscreenOverlay
+) {
 
   browserFullscreenBtn.addEventListener(
     'click',
@@ -733,7 +744,7 @@ if (browserFullscreenBtn) {
 
 
 // ======================================================
-// عند الخروج من Fullscreen
+// عند الخروج من Full Screen
 // ======================================================
 
 document.addEventListener(
