@@ -34,10 +34,7 @@ for (let i = 1; i <= warehouseTotal; i++) {
         مخزن ${i}
       </h3>
 
-      <a class="open-link"
-         href="warehouse.html?location=${encodeURIComponent(loc)}
-         &name=${encodeURIComponent(locName)}
-         &warehouse=${i}">
+      <a class="open-link" href="warehouse.html?location=${encodeURIComponent(loc)}&name=${encodeURIComponent(locName)}&warehouse=${i}">
         فتح المخزن
         <i class="fa-solid fa-up-right-from-square"></i>
       </a>
