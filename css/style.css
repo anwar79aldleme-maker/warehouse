@@ -1174,3 +1174,36 @@
 .sensor-online { color: #38d996; }
 .sensor-offline { color: #ffb15c; }
 .sensor-waiting { color: #8fb8ff; }
+.warehouse-card .live-camera-frame {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+.warehouse-card .live-camera-frame iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.warehouse-card .live-camera-badge {
+  position: absolute;
+  z-index: 3;
+  top: 7px;
+  right: 7px;
+  background: rgba(2, 6, 23, .78);
+  color: #fff;
+  border-radius: 999px;
+  padding: 4px 7px;
+  font-size: 8px;
+  pointer-events: none;
+}
+
+.warehouse-card .live-camera-badge i {
+  color: #22c55e;
+  font-size: 7px;
+  margin-left: 4px;
+}
